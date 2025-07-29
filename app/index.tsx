@@ -3,12 +3,9 @@ import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { colors } from "@/constants/Colors";
 import Button from '../components/button';
 import NavBar from '../components/navbar';
-import { useLoadFonts } from '../hooks/useLoadFonts';
 
 
 export default function Index() {
-
-const fontsLoaded = useLoadFonts();
 
   return (
       <View style={styles.screen}>
