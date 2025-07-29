@@ -6,15 +6,9 @@ export default function RootLayout() {
 
     <Stack.Screen
     name = "index"
-    options={{title : 'Bem-Vindo' }}
+    options={{headerShown:false}}
     />
 
-    <Stack.Screen
-    name = "(tabs)"
-    options={{ headerShown: false }}
-    />
-  
-
-  </Stack>
+   </Stack>
   )
 }
