@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor:colors.text,
         borderRadius: 10,
-        height: 40,
+        height: 30,
         width: '80%',
         display:'flex', 
         textAlign:'left',

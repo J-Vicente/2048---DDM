@@ -27,13 +27,13 @@ export default function ButtonAuth(props:ButtonProps){
 
 const styles = StyleSheet.create({
     container:{
-      marginTop:30,
-      marginBottom:15,  
+      marginTop:20,
+ 
     },
     button:{
         borderRadius: 10,
-        height: 45,
-        width:180,
+        height: 40,
+        width:150,
         display:'flex',
         justifyContent:'center',
         backgroundColor:colors.newGame,
