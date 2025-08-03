@@ -45,12 +45,14 @@ export default function Button(props:ButtonProps){
 
 const styles = StyleSheet.create({
     container:{
-       width:'90%',
+       width:290,
        alignItems:"center",
        backgroundColor:'#242A32',
        justifyContent:'center',
        padding:5,
        borderRadius:10,
+       borderColor:colors.playAgain,
+       borderWidth:1,
     },
     row:{
         width:'100%',

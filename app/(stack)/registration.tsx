@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     height:'80%',
     width:'85%',
+    marginTop:20,
   },
   title:{
     fontFamily:'Inter_900Black',
