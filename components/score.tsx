@@ -2,19 +2,22 @@ import { colors } from "@/constants/Colors";
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useLoadFonts } from '@/hooks/useLoadFonts';
+import { GameProvider, UseGame } from "@/contexts/gameContext";
 
     
 interface ScoreProps {
-    score:number;
+    
 }
 
 export default function Score(props:ScoreProps){
   const fontsLoaded = useLoadFonts();
+  const {score} = UseGame();
 
     return(
+
         <View style={styles.container}>
             <Text style={[styles.text, styles.text_score]}>PONTUAÇÃO</Text>
-            <Text style={[styles.text, styles.score]}>{props.score}</Text>
+            <Text style={[styles.text, styles.score]}>{score}</Text>
         </View>
     );
 }

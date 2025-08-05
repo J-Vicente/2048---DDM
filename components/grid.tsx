@@ -2,7 +2,7 @@ import { colors } from "@/constants/Colors";
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import Block from '../components/block';
-
+import { GameProvider, UseGame } from "@/contexts/gameContext";
 
 interface ButtonProps {
     
@@ -10,34 +10,35 @@ interface ButtonProps {
 
 export default function Button(props:ButtonProps){
 
+    const {grid} = UseGame();
+
     return(
         <View style={styles.container}>
+            
             <View style={styles.row}>
-               <Block number={2}></Block> 
-               <Block number={4}></Block> 
-               <Block number={8}></Block> 
-               <Block number={16}></Block> 
+               <Block number={grid[0][0]}></Block> 
+               <Block number={grid[0][1]}></Block> 
+               <Block number={grid[0][2]}></Block> 
+               <Block number={grid[0][3]}></Block> 
             </View>
             <View style={styles.row}>
-               <Block number={32}></Block> 
-               <Block number={64}></Block> 
-               <Block number={128}></Block> 
-               <Block number={256}></Block> 
+               <Block number={grid[1][0]}></Block> 
+               <Block number={grid[1][1]}></Block> 
+               <Block number={grid[1][2]}></Block> 
+               <Block number={grid[1][3]}></Block> 
             </View>
             <View style={styles.row}>
-               <Block number={512}></Block> 
-               <Block number={1024}></Block> 
-               <Block number={2048}></Block> 
-               <Block number={0}></Block> 
+               <Block number={grid[2][0]}></Block> 
+               <Block number={grid[2][1]}></Block> 
+               <Block number={grid[2][2]}></Block> 
+               <Block number={grid[2][3]}></Block> 
             </View>
             <View style={styles.row}>
-               <Block number={0}></Block> 
-               <Block number={0}></Block> 
-               <Block number={0}></Block> 
-               <Block number={0}></Block> 
+               <Block number={grid[3][0]}></Block> 
+               <Block number={grid[3][1]}></Block> 
+               <Block number={grid[3][2]}></Block> 
+               <Block number={grid[3][3]}></Block> 
             </View>
-
-        
 
         </View>
     );

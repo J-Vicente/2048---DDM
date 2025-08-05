@@ -4,23 +4,27 @@ import NavBar from '../../components/navbar';
 import Score from '../../components/score';
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "@/constants/Colors";
+import { GameProvider, UseGame } from "@/contexts/gameContext";
 
 export default function game(){
+  const {score} = UseGame();
+
     return(
-      <View style={styles.screen}>
-        <LinearGradient
-          colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
-          style={styles.container} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
+      <GameProvider>
+        <View style={styles.screen}>
+          <LinearGradient
+            colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
+            style={styles.container} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
 
-            <NavBar iconHome={true} iconUser={true}/>
+              <NavBar iconHome={true} iconUser={true}/>
 
-            <Score score={12480}/>
+              <Score score={score}/>
 
-            <Grid/>
+              <Grid/>
 
-        </LinearGradient>
-       </View> 
-
+          </LinearGradient>
+        </View> 
+      </GameProvider>
     ); 
 }
 

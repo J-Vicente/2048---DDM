@@ -2,6 +2,7 @@ import { colors } from "@/constants/Colors";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useLoadFonts } from '@/hooks/useLoadFonts';
+import { GameProvider } from "@/contexts/gameContext";
 
 interface BlockProps {
   number: number;
