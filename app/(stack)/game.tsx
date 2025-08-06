@@ -5,9 +5,30 @@ import Score from '../../components/score';
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "@/constants/Colors";
 import { GameProvider, UseGame } from "@/contexts/gameContext";
+import GestureRecognizer from 'react-native-swipe-gestures';
+
 
 export default function game(){
-  const {score} = UseGame();
+  const {score, moveBlocks} = UseGame();
+
+  const handleSwipe = (direction: string) => {
+    
+    switch (direction) {
+      case 'SWIPE_LEFT':
+        moveBlocks(2); 
+        break;
+      case 'SWIPE_RIGHT':
+        console.log(direction)
+        moveBlocks(1); 
+        break;
+      case 'SWIPE_UP':
+        moveBlocks(3); 
+        break;
+      case 'SWIPE_DOWN':
+        moveBlocks(4); 
+        break;
+    }
+  };
 
     return(
       <GameProvider>
@@ -18,9 +39,13 @@ export default function game(){
 
               <NavBar iconHome={true} iconUser={true}/>
 
-              <Score score={score}/>
+              <Score/>
+              
+                
+                <Grid/>
 
-              <Grid/>
+            
+              
 
           </LinearGradient>
         </View> 

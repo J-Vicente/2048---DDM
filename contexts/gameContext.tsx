@@ -123,6 +123,9 @@ export function GameProvider({children}:{children: ReactNode }){
           }
         }
       }
+
+      newBlock();
+
     }
 
   return(
@@ -130,7 +133,7 @@ export function GameProvider({children}:{children: ReactNode }){
       score,
       grid ,
       newBlock,
-      moveBlocks,
+      moveBlocks: (a) => moveBlocks(a),
       canMerge,
     }}>
       {children}
