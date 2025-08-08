@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 interface GameContextControls{
     score: number;
@@ -12,7 +12,7 @@ const GameContext = createContext<GameContextControls>({} as GameContextControls
 
 export function GameProvider({children}:{children: ReactNode }){
     const [score, setScore] = useState(12840);
-    const [grid, setGrid] = useState(Array.from({ length: 4 }, () =>Array(4).fill(2)));
+    const [grid, setGrid] = useState(Array.from({ length: 4 }, () =>Array(4).fill(0)));
     const [canMerge, setCanMerge] = useState(false);
   
 
@@ -30,17 +30,29 @@ export function GameProvider({children}:{children: ReactNode }){
 
       if (emptyCells.length === 0) return;
 
+      
+
       const randomIndex = Math.floor(Math.random() * emptyCells.length);
       const { row, col } = emptyCells[randomIndex];
 
       const newGrid = grid.map((row) => [...row]);
       newGrid[row][col] = Math.random() < 0.9 ? 2 : 4;
 
-      setGrid(newGrid);
+      
+      setGrid(prevGrid => {
+        const newGrid = prevGrid.map(row => [...row]);
+        const randomIndex = Math.floor(Math.random() * emptyCells.length);
+        const { row, col } = emptyCells[randomIndex];  
+        newGrid[row][col] = Math.random() < 0.9 ? 2 : 4;
+
+        return newGrid;
+      });
+      
+
     }
 
     function moveBlocks(direction: number){
-
+      //direita
       if(direction == 1){
         for (let i = 0; i < grid.length; i++) {
             for (let j = 0; j < grid[i].length; j++) {
@@ -62,9 +74,10 @@ export function GameProvider({children}:{children: ReactNode }){
         }
       }
 
+      //esquerda
       if(direction == 2){
-        for (let i = 0; i < grid.length; i++) {
-            for (let j = 0; j < grid[i].length; j++) {
+        for (let i = 3; i >= 0; i--) {
+            for (let j = 3; j >= 0; j--) {
 
               if((grid[i][j] != 0) && (grid[i][j-1] == 0)){
 
@@ -82,9 +95,10 @@ export function GameProvider({children}:{children: ReactNode }){
         }
       }
 
+      //cima
       if(direction == 3){
-        for (let i = 0; i < grid.length; i++) {
-            for (let j = 0; j < grid[i].length; j++) {
+        for (let j = 3; j >= 0; j--) {
+            for (let i = 3; i > 0; i--) {
 
               if((grid[i][j] != 0) && (grid[i-1][j] == 0)){
 
@@ -103,11 +117,12 @@ export function GameProvider({children}:{children: ReactNode }){
         }
       }
 
+        //baixo
       if(direction == 4){
-        for (let i = 0; i < grid.length; i++) {
-            for (let j = 0; j < grid[i].length; j++) {
+        for (let j = 0; j <= 3; j++) {
+            for (let i = 0; i < 3; i++) {
 
-              if((grid[i][j] == 0) && (grid[i+1][j] != 0)){
+              if((grid[i][j] != 0) && (grid[i+1][j] == 0)){
 
                 grid[i+1][j] = grid[i][j];
                 grid[i][j] = 0;
@@ -127,6 +142,11 @@ export function GameProvider({children}:{children: ReactNode }){
       newBlock();
 
     }
+
+    useEffect(() => {
+      newBlock();
+      newBlock(); 
+    }, []);
 
   return(
     <GameContext.Provider value={{

@@ -9,26 +9,7 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 
 
 export default function game(){
-  const {score, moveBlocks} = UseGame();
-
-  const handleSwipe = (direction: string) => {
-    
-    switch (direction) {
-      case 'SWIPE_LEFT':
-        moveBlocks(2); 
-        break;
-      case 'SWIPE_RIGHT':
-        console.log(direction)
-        moveBlocks(1); 
-        break;
-      case 'SWIPE_UP':
-        moveBlocks(3); 
-        break;
-      case 'SWIPE_DOWN':
-        moveBlocks(4); 
-        break;
-    }
-  };
+  
 
     return(
       <GameProvider>

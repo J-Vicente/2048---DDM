@@ -11,8 +11,9 @@ interface ButtonProps {
 
 export default function Button(props:ButtonProps){
 
-    const {grid,moveBlocks} = UseGame();
+  const {grid, moveBlocks, newBlock} = UseGame();
 
+  
   const handleSwipe = (direction: string) => {
     
     switch (direction) {
@@ -20,7 +21,6 @@ export default function Button(props:ButtonProps){
         moveBlocks(2); 
         break;
       case 'SWIPE_RIGHT':
-        console.log(direction)
         moveBlocks(1); 
         break;
       case 'SWIPE_UP':
