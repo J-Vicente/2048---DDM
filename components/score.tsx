@@ -4,12 +4,8 @@ import { StyleSheet, View, Text } from "react-native";
 import { useLoadFonts } from '@/hooks/useLoadFonts';
 import { GameProvider, UseGame } from "@/contexts/gameContext";
 
-    
-interface ScoreProps {
-    
-}
 
-export default function Score(props:ScoreProps){
+export default function Score(){
   const fontsLoaded = useLoadFonts();
   const {score} = UseGame();
 
@@ -34,6 +30,7 @@ const styles = StyleSheet.create({
         paddingLeft:20,
         paddingRight:20,
         borderRadius:5,
+        width:'50%',
     },
     text:{
         color:colors.text,      

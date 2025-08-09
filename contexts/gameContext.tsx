@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 interface GameContextControls{
@@ -6,15 +7,28 @@ interface GameContextControls{
     newBlock:()=> void; 
     moveBlocks:(direction:number)=> void;
     canMerge: boolean;
+    loseGame:()=> void;
+    restartGame:()=> void;
 }
 
 const GameContext = createContext<GameContextControls>({} as GameContextControls);
 
 export function GameProvider({children}:{children: ReactNode }){
-    const [score, setScore] = useState(12840);
+    const [score, setScore] = useState(0);
     const [grid, setGrid] = useState(Array.from({ length: 4 }, () =>Array(4).fill(0)));
-    const [canMerge, setCanMerge] = useState(false);
-  
+    const [canMerge, setCanMerge] = useState(true);
+    
+    const router = useRouter();
+
+    function loseGame(){
+      setCanMerge(!canMerge);
+      return;
+    }
+
+    function restartGame() {
+      setCanMerge(true);
+      router.push('/game')
+    }
 
     function newBlock(){
 
@@ -28,8 +42,10 @@ export function GameProvider({children}:{children: ReactNode }){
         });
       });
 
-      if (emptyCells.length === 0) return;
-
+      if (emptyCells.length === 0) {
+        loseGame();
+        return;
+      }  
       
 
       const randomIndex = Math.floor(Math.random() * emptyCells.length);
@@ -155,6 +171,8 @@ export function GameProvider({children}:{children: ReactNode }){
       newBlock,
       moveBlocks: (a) => moveBlocks(a),
       canMerge,
+      loseGame,
+      restartGame,
     }}>
       {children}
     </GameContext.Provider>

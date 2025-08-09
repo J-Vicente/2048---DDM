@@ -2,14 +2,13 @@ import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import Grid from '../../components/grid';
 import NavBar from '../../components/navbar';
 import Score from '../../components/score';
+import LoseModal from '../../components/losemodal'
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "@/constants/Colors";
 import { GameProvider, UseGame } from "@/contexts/gameContext";
-import GestureRecognizer from 'react-native-swipe-gestures';
 
 
 export default function game(){
-  
 
     return(
       <GameProvider>
@@ -22,12 +21,9 @@ export default function game(){
 
               <Score/>
               
-                
-                <Grid/>
+              <Grid/>
 
-            
-              
-
+              <LoseModal/>
           </LinearGradient>
         </View> 
       </GameProvider>

@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         width:'100%',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        marginTop:20,
     },
     iconHome:{
         marginLeft:'5%',

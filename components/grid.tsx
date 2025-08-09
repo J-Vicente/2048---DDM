@@ -5,37 +5,38 @@ import Block from '../components/block';
 import { GameProvider, UseGame } from "@/contexts/gameContext";
 import GestureRecognizer from "react-native-swipe-gestures";
 
-interface ButtonProps {
-    
-}
 
-export default function Button(props:ButtonProps){
+export default function Button(){
 
-  const {grid, moveBlocks, newBlock} = UseGame();
+  const {grid, moveBlocks} = UseGame();
 
   
   const handleSwipe = (direction: string) => {
-    
+    console.log(direction);
     switch (direction) {
       case 'SWIPE_LEFT':
+        console.log(direction);
         moveBlocks(2); 
         break;
       case 'SWIPE_RIGHT':
+        console.log(direction);
         moveBlocks(1); 
         break;
       case 'SWIPE_UP':
+        console.log(direction);
         moveBlocks(3); 
         break;
       case 'SWIPE_DOWN':
+        console.log(direction);
         moveBlocks(4); 
         break;
     }
   };
 
     return(
-        <GestureRecognizer
-                        onSwipe={(dir) => handleSwipe(dir)}
-                        config={{ velocityThreshold: 0.3, directionalOffsetThreshold: 80 }}>
+        <GestureRecognizer onSwipe={(dir) => handleSwipe(dir)}
+        config={{ velocityThreshold: 0.3, directionalOffsetThreshold: 80 }}>
+                
             <View style={styles.container}>
                 
                 <View style={styles.row}>
