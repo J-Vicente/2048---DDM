@@ -1,18 +1,23 @@
 import { colors } from "@/constants/Colors";
 import React from "react";
 import { View, TextInput, Text, StyleSheet } from "react-native";
+import { UseUser } from "@/contexts/userContext";
 
 interface InputProps {
     label: string;
     placeHolder: string;
+    name: string;
 }
 
 export default function Button(props:InputProps){
 
+    const {updateField} = UseUser();
+
     return(
         <View style={styles.container}>
             <Text style={styles.textLabel}>{props.label}</Text>
-            <TextInput style={styles.textInput} placeholder={props.placeHolder}></TextInput>
+            <TextInput style={styles.textInput} placeholder={props.placeHolder}
+            onChangeText={(text) => updateField(props.name, text)}></TextInput>
         </View>
     );
 }

@@ -1,13 +1,15 @@
 import { colors } from "@/constants/Colors";
 import React from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
 import { LinkProps, useRouter } from "expo-router";
 import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons';
-
+import { UseUser } from "@/contexts/userContext";
+import { authService } from "@/services/auth";
 
 interface ButtonProps {
   title: string;
   route: LinkProps['href'];
+  name: string;
 }
 
 export default function ButtonAuth(props:ButtonProps){
@@ -15,10 +17,26 @@ export default function ButtonAuth(props:ButtonProps){
     
     let color: string = '';
 
+    const {username, email, password} = UseUser();
+
+    function callApi(name:string){
+        if(name == 'login'){
+            authService.login({email, password});
+            Alert.alert('usuario logdo com sucesso');
+        }
+
+        if(name == 'registration'){
+            authService.cadastrar({username, email, password});
+            Alert.alert('usuario cadastrado com sucesso');
+        }
+
+        router.push(props.route)
+    }
+
     return(
         <View style={styles.container}>
             <TouchableOpacity style={styles.button}
-            onPress={() => router.push(props.route)}>     
+            onPress={() => callApi(props.name)}>     
                     <Text style={styles.text}>{props.title}</Text>
             </TouchableOpacity>
         </View>

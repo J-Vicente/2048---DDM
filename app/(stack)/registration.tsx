@@ -5,42 +5,47 @@ import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "@/constants/Colors";
 import ButtonAuth from "@/components/buttonauth";
 import { Link} from "expo-router";
+import { UserProvider } from "@/contexts/userContext";
+import { useLoadFonts } from "@/hooks/useLoadFonts";
 
 export default function login(){
 
+  const fontsLoaded = useLoadFonts();
 
     return(
-    <View style={styles.screen}>
-        <LinearGradient
-            colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
-            style={styles.container} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
-            
-            <NavBar iconHome={true} iconUser={true} />
-            
-            <View style={styles.main}>
-              <View style={styles.form} > 
+      <UserProvider>
+      <View style={styles.screen}>
+          <LinearGradient
+              colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
+              style={styles.container} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
+              
+              <NavBar iconHome={true} iconUser={true} />
+              
+              <View style={styles.main}>
+                <View style={styles.form} > 
 
-                <Text style={[styles.text, styles.title]} >Cadastro</Text>
-                <Text style={[styles.text, {marginBottom:10}]} >Cadastre-se para salvar seus resultados</Text>
-                
-                <Input label={'Nome do usuário'} placeHolder={'seu nome'}/>
+                  <Text style={[styles.text, styles.title]} >Cadastro</Text>
+                  <Text style={[styles.text, {marginBottom:10}]} >Cadastre-se para salvar seus resultados</Text>
+                  
+                  <Input label={'Nome do usuário'} placeHolder={'seu nome'} name={"username"}/>
 
-                <Input label={'Email'} placeHolder={'seu@email.com'}/>
+                  <Input label={'Email'} placeHolder={'seu@email.com'} name={"email"}/>
 
-                <Input label={'Senha'} placeHolder={'sua senha'}/>
+                  <Input label={'Senha'} placeHolder={'sua senha'} name={"password"}/>
 
-                <Input label={'Confirmar Senha'} placeHolder={'confirme sua senha'}/>
+                  <Input label={'Confirmar Senha'} placeHolder={'confirme sua senha'} name="passwordConf"/>
 
-                <ButtonAuth title={'Criar Conta'} route={'/login'}/>
+                  <ButtonAuth title={'Criar Conta'} route={'/login'} name="registration"/>
 
-                <Text style={[styles.text, styles.options]} >Já tem conta?
-                  <Link style={styles.link} href='/login'> Entrar</Link> 
-                </Text> 
+                  <Text style={[styles.text, styles.options]} >Já tem conta?
+                    <Link style={styles.link} href='/login'> Entrar</Link> 
+                  </Text> 
 
+                </View>
               </View>
-            </View>
-        </LinearGradient>    
-    </View>
+          </LinearGradient>    
+      </View>
+      </UserProvider>
     );
 }
 

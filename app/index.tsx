@@ -4,33 +4,36 @@ import { colors } from "@/constants/Colors";
 import Button from '../components/button';
 import NavBar from '../components/navbar';
 import { useLoadFonts } from '@/hooks/useLoadFonts';
+import { UserProvider } from '@/contexts/userContext';
 
 export default function Index() {
   
   const fontsLoaded = useLoadFonts();
 
   return (
-      <View style={styles.screen}>
-        <LinearGradient
-          colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
-          style={styles.container} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
+    
+        <View style={styles.screen}>
+          <LinearGradient
+            colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
+            style={styles.container} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
 
-            <NavBar iconHome={false} iconUser={true}/>
+              <NavBar iconHome={false} iconUser={true}/>
 
-            <View>
-              <Text style={styles.title}>2048</Text>
-            </View>
+              <View>
+                <Text style={styles.title}>2048</Text>
+              </View>
 
-            <Button title="Novo Jogo" color="newGame" route="/game"></Button>
-            <Button title="Continuar" color="continue" route="/game"></Button>
-            <Button title="Melhores Pontuações" color="ranking" route="/ranking"></Button>
+              <Button title="Novo Jogo" color="newGame" route="/game"></Button>
+              <Button title="Continuar" color="continue" route="/game"></Button>
+              <Button title="Melhores Pontuações" color="ranking" route="/ranking"></Button>
 
-            <View style={styles.instructionsView}>
-              <Text style={styles.instructions}>Deslize para combinar blocos e conseguir as maiores pontuações.</Text> 
-            </View>
-              
-        </LinearGradient>
-      </View>
+              <View style={styles.instructionsView}>
+                <Text style={styles.instructions}>Deslize para combinar blocos e conseguir as maiores pontuações.</Text> 
+              </View>
+                
+          </LinearGradient>
+        </View>
+      
   );
 }
 

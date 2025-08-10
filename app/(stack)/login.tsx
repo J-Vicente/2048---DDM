@@ -5,39 +5,43 @@ import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "@/constants/Colors";
 import ButtonAuth from "@/components/buttonauth";
 import { Link} from "expo-router";
+import { useLoadFonts } from "@/hooks/useLoadFonts";
+import { UserProvider } from "@/contexts/userContext";
 
 export default function login(){
-
+  const fontsLoaded = useLoadFonts();
 
     return(
-    <View style={styles.screen}>
-        <LinearGradient
-            colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
-            style={styles.container} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
-            
-            <NavBar iconHome={true} iconUser={false} />
-            
-            <View style={styles.main}>
-              <View style={styles.form} > 
+      <UserProvider>
+      <View style={styles.screen}>
+          <LinearGradient
+              colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
+              style={styles.container} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
+              
+              <NavBar iconHome={true} iconUser={false} />
+              
+              <View style={styles.main}>
+                <View style={styles.form} > 
 
-                <Text style={[styles.text, styles.title]} >Entrar</Text>
-                <Text style={[styles.text, {marginBottom:20}]} >Entre para salvar seus resultados</Text>
+                  <Text style={[styles.text, styles.title]} >Entrar</Text>
+                  <Text style={[styles.text, {marginBottom:20}]} >Entre para salvar seus resultados</Text>
 
-                <Input label={'Email'} placeHolder={'seu@email.com'}/>
+                  <Input label={'Email'} placeHolder={'seu@email.com'} name="email"/>
 
-                <Input label={'Senha'} placeHolder={'sua senha'}/>
+                  <Input label={'Senha'} placeHolder={'sua senha'} name="password"/>
 
-                <ButtonAuth title={'Entrar'} route={'/'}/>
+                  <ButtonAuth title={'Entrar'} route={'/'} name="login"/>
 
-                <Text style={[styles.text, styles.options]} >Esqueceu a senha?</Text>
-                <Text style={[styles.text, styles.options]} >Não tem conta?
-                  <Link style={styles.link} href='/registration'> Criar Conta</Link> 
-                </Text> 
+                  <Text style={[styles.text, styles.options]} >Esqueceu a senha?</Text>
+                  <Text style={[styles.text, styles.options]} >Não tem conta?
+                    <Link style={styles.link} href='/registration'> Criar Conta</Link> 
+                  </Text> 
 
+                </View>
               </View>
-            </View>
-        </LinearGradient>    
-    </View>
+          </LinearGradient>    
+      </View>
+      </UserProvider>
     );
 }
 
