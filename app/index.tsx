@@ -4,14 +4,12 @@ import { colors } from "@/constants/Colors";
 import Button from '../components/button';
 import NavBar from '../components/navbar';
 import { useLoadFonts } from '@/hooks/useLoadFonts';
-import { UserProvider } from '@/contexts/userContext';
 
 export default function Index() {
   
   const fontsLoaded = useLoadFonts();
 
   return (
-    
         <View style={styles.screen}>
           <LinearGradient
             colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
@@ -33,7 +31,6 @@ export default function Index() {
                 
           </LinearGradient>
         </View>
-      
   );
 }
 
@@ -59,7 +56,7 @@ const styles = StyleSheet.create({
     marginTop:30,
   },
   title:{
-    fontSize: 85,
+    fontSize: 80,
     color: colors.text,
     marginBottom:10,
     fontFamily:'Inter_900Black'

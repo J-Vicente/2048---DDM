@@ -1,5 +1,6 @@
 import { useRouter } from "expo-router";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface GameContextControls{
     score: number;
@@ -9,24 +10,77 @@ interface GameContextControls{
     canMerge: boolean;
     loseGame:()=> void;
     restartGame:()=> void;
+    newGame: ()=> void;
+    continueGame: ()=> void;
 }
 
 const GameContext = createContext<GameContextControls>({} as GameContextControls);
 
 export function GameProvider({children}:{children: ReactNode }){
+  
     const [score, setScore] = useState(0);
     const [grid, setGrid] = useState(Array.from({ length: 4 }, () =>Array(4).fill(0)));
     const [canMerge, setCanMerge] = useState(true);
+    const [emptyGrid, setEmptyGrid] = useState(false);
     
     const router = useRouter();
 
-    function loseGame(){
+    function newGame() {
+      setGrid(prevGrid => {
+        const newGrid = Array.from({ length: 4 }, () =>Array(4).fill(0));
+        return newGrid;
+      });              
+      newBlock();
+      newBlock();
+    }
+
+      
+    function continueGame() {
+      loadGame();
+    }
+
+    async function loseGame(){
       setCanMerge(!canMerge);
+      try {
+        await AsyncStorage.removeItem('score');
+        await AsyncStorage.removeItem('grid');
+        console.log("Jogo resetado!");
+      } catch (error) {
+        console.error("Erro ao resetar o jogo", error);
+      }
       return;
+    }
+
+    async function saveGame(score:number, grid:number[][]) {
+      try {
+        await AsyncStorage.setItem('score', score.toString()); 
+        await AsyncStorage.setItem('grid', JSON.stringify(grid)); 
+        console.log("Jogo salvo!");
+      } catch (error) {
+        console.error("Erro ao salvar o jogo", error);
+      }
+    }
+
+    async function loadGame() {
+        try {
+          const scoreSalvo = await AsyncStorage.getItem('score');
+          const gridSalvo = await AsyncStorage.getItem('grid');
+
+          if (scoreSalvo !== null && gridSalvo !== null) {      
+              setScore(parseInt(scoreSalvo, 10));
+              setGrid(JSON.parse(gridSalvo));
+              return;    
+          }
+          return null; 
+        } catch (error) {
+          console.error("Erro ao carregar o jogo", error);
+          return null;
+        }
     }
 
     function restartGame() {
       setCanMerge(true);
+      setEmptyGrid(true);
       router.push('/game')
     }
 
@@ -156,13 +210,11 @@ export function GameProvider({children}:{children: ReactNode }){
       }
 
       newBlock();
-
     }
 
     useEffect(() => {
-      newBlock();
-      newBlock(); 
-    }, []);
+      saveGame(score,grid)
+    }, [grid]);
 
   return(
     <GameContext.Provider value={{
@@ -173,6 +225,8 @@ export function GameProvider({children}:{children: ReactNode }){
       canMerge,
       loseGame,
       restartGame,
+      newGame,
+      continueGame,
     }}>
       {children}
     </GameContext.Provider>

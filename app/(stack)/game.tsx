@@ -9,9 +9,9 @@ import { GameProvider, UseGame } from "@/contexts/gameContext";
 
 
 export default function game(){
-
+  
     return(
-      <GameProvider>
+      
         <View style={styles.screen}>
           <LinearGradient
             colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
@@ -26,7 +26,7 @@ export default function game(){
               <LoseModal/>
           </LinearGradient>
         </View> 
-      </GameProvider>
+      
     ); 
 }
 

@@ -3,6 +3,7 @@ import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { LinkProps, useRouter } from "expo-router";
 import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons';
+import { GameProvider, UseGame } from "@/contexts/gameContext";
 
 
 interface ButtonProps {
@@ -14,6 +15,8 @@ interface ButtonProps {
 }
 
 export default function Button(props:ButtonProps){
+    const {newGame, continueGame} = UseGame();
+
     const router = useRouter();
     
     let color: string = '';
@@ -36,16 +39,30 @@ export default function Button(props:ButtonProps){
 
     const icon = iconMap[props.color as keyof typeof iconMap];
 
+    function goTo(){
+        console.log('antes do if Novo jogo');
+        if( props.title == 'Novo Jogo'){
+            console.log('antes do newGame');
+            newGame();
+        }
+        if(props.title == 'Continuar'){
+            console.log('antes do newGame');
+            continueGame();
+        }
+        console.log('antes do push');
+        router.push(props.route)
+    }
+
     return(
-        <View style={styles.container}>
-            <TouchableOpacity style={[styles.button, {backgroundColor:color}, props.border && styles.buttonBorder]}
-            onPress={() => router.push(props.route)}>     
-                <View style={styles.content}>
-                    {icon}     
-                    <Text style={[styles.text, props.border && styles.textBorder]}>{props.title}</Text>
-                </View>
-            </TouchableOpacity>
-        </View>
+            <View style={styles.container}>
+                <TouchableOpacity style={[styles.button, {backgroundColor:color}, props.border && styles.buttonBorder]}
+                onPress={() => goTo()}>     
+                    <View style={styles.content}>
+                        {icon}     
+                        <Text style={[styles.text, props.border && styles.textBorder]}>{props.title}</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
     );
 }
 

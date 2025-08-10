@@ -2,7 +2,7 @@ import { colors } from "@/constants/Colors";
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import Block from '../components/block';
-import { GameProvider, UseGame } from "@/contexts/gameContext";
+import { UseGame } from "@/contexts/gameContext";
 import GestureRecognizer from "react-native-swipe-gestures";
 
 

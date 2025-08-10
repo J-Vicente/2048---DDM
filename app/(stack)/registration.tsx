@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
     alignItems:'center',
     paddingBottom:10,
     paddingTop:10,
+    height:'90%',
   },
   main:{
-    justifyContent:'center',
-    height:'80%',
+
+    height:'90%',
     width:'85%',
-    marginTop:20,
   },
   title:{
     fontFamily:'Inter_900Black',
