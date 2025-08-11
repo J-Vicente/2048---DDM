@@ -1,9 +1,10 @@
 import {jwtDecode} from 'jwt-decode';
 import { useRouter } from "expo-router";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface UserContextControls{
-  username: string;
+  userName: string | null;
   email: string;
   password: string;
   updateField: (name:string,value:string) => void
@@ -17,13 +18,13 @@ export function UserProvider({children}:{children: ReactNode }){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [username, setUsername] = useState('');
+    const [userName, setUserName] = useState<string | null>(null);
 
 
     function updateField(name:string ,value:string){
       switch(name){
         case 'username':
-          setUsername(value);
+          setUserName(value);
           break;
         case 'email':
           setEmail(value)
@@ -43,10 +44,10 @@ export function UserProvider({children}:{children: ReactNode }){
 
   return(
     <UserContext.Provider value={{
-      username,
+      userName,
       email,
       password,
-      updateField: (a,b) => updateField(a,b)
+      updateField: (a,b) => updateField(a,b),
     }}>
       {children}
     </UserContext.Provider>

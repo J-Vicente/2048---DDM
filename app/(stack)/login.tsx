@@ -12,7 +12,6 @@ export default function login(){
   const fontsLoaded = useLoadFonts();
 
     return(
-      <UserProvider>
       <View style={styles.screen}>
           <LinearGradient
               colors={[colors.gradient1, colors.gradient2, colors.gradient3]} 
@@ -41,7 +40,6 @@ export default function login(){
               </View>
           </LinearGradient>    
       </View>
-      </UserProvider>
     );
 }
 

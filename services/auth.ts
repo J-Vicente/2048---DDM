@@ -1,16 +1,18 @@
+import { UseUser } from '@/contexts/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
 const getBaseUrl = () => {
   if (Platform.OS === 'android') {
-    return 'http://localhost:3000/api'; 
+    return 'http://192.168.2.153:3000/api'; 
   }
-  return 'http://localhost:3000/api'; 
+  return 'http://192.168.2.153:3000/api'; 
 };
 
 const BASE_URL =getBaseUrl();
 
 interface CadastroData {
-  username: string;
+  userName: string | null;
   email: string;
   password: string;
 }
@@ -44,6 +46,7 @@ class AuthService {
   }
 
   async login(credentials: LoginData) {
+
     try {
       const response = await fetch(`${BASE_URL}/user/login`, {
         method: 'POST',
@@ -54,6 +57,10 @@ class AuthService {
       });
 
       const data = await response.json();
+
+      const userName = data?.user?.userName || null;
+
+      await AsyncStorage.setItem('userName', userName);
 
       if (!response.ok) {
         throw new Error(data.error || 'Erro no login');

@@ -1,6 +1,8 @@
 import { useRouter } from "expo-router";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { recordService } from "@/services/api";
+import { UseUser } from "./userContext";
 
 interface GameContextControls{
     score: number;
@@ -26,25 +28,48 @@ export function GameProvider({children}:{children: ReactNode }){
     const router = useRouter();
 
     function newGame() {
+      console.log('newgame');
       setGrid(prevGrid => {
         const newGrid = Array.from({ length: 4 }, () =>Array(4).fill(0));
         return newGrid;
       });              
       newBlock();
       newBlock();
+      console.log('novos blocos');
     }
 
-      
     function continueGame() {
       loadGame();
     }
 
     async function loseGame(){
+      
+      let h = 1;
+
       setCanMerge(!canMerge);
+
+      grid.forEach((row, rowIndex) => {
+        row.forEach((value, colIndex) => {
+          if (value > h) {
+            h = value;
+          }
+        });
+      });
+
+      const higherBlock = h;
+
+      const dateNow = new Date();
+      const date = dateNow.toLocaleDateString();
+      
+      const userName = await AsyncStorage.getItem('userName');
+
+      console.log({score, date, higherBlock, userName});
+      recordService.cadastrar({score, date, higherBlock, userName});
+
       try {
         await AsyncStorage.removeItem('score');
         await AsyncStorage.removeItem('grid');
-        console.log("Jogo resetado!");
+        console.log("Jogo resetado!");        
       } catch (error) {
         console.error("Erro ao resetar o jogo", error);
       }
@@ -81,35 +106,27 @@ export function GameProvider({children}:{children: ReactNode }){
     function restartGame() {
       setCanMerge(true);
       setEmptyGrid(true);
+      newGame();
       router.push('/game')
     }
 
     function newBlock(){
-
-      const emptyCells: { row: number; col: number }[] = [];
-
-      grid.forEach((row, rowIndex) => {
-        row.forEach((value, colIndex) => {
-          if (value === 0) {
-            emptyCells.push({ row: rowIndex, col: colIndex });
-          }
-        });
-      });
-
-      if (emptyCells.length === 0) {
-        loseGame();
-        return;
-      }  
-      
-
-      const randomIndex = Math.floor(Math.random() * emptyCells.length);
-      const { row, col } = emptyCells[randomIndex];
-
-      const newGrid = grid.map((row) => [...row]);
-      newGrid[row][col] = Math.random() < 0.9 ? 2 : 4;
-
-      
       setGrid(prevGrid => {
+        const emptyCells: { row: number; col: number }[] = [];
+
+        prevGrid.forEach((row, rowIndex) => {
+          row.forEach((value, colIndex) => {
+            if (value === 0) {
+              emptyCells.push({ row: rowIndex, col: colIndex });
+            }
+          });
+        });
+
+        if (emptyCells.length === 0) {
+          loseGame();
+          return prevGrid;
+        }
+
         const newGrid = prevGrid.map(row => [...row]);
         const randomIndex = Math.floor(Math.random() * emptyCells.length);
         const { row, col } = emptyCells[randomIndex];  
@@ -117,7 +134,6 @@ export function GameProvider({children}:{children: ReactNode }){
 
         return newGrid;
       });
-      
 
     }
 

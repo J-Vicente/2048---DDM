@@ -17,16 +17,16 @@ export default function ButtonAuth(props:ButtonProps){
     
     let color: string = '';
 
-    const {username, email, password} = UseUser();
+    const {userName, email, password} = UseUser();
 
     function callApi(name:string){
         if(name == 'login'){
-            authService.login({email, password});
-            Alert.alert('usuario logdo com sucesso');
+              authService.login({email, password});         
+            Alert.alert('usuario logado com sucesso');
         }
 
         if(name == 'registration'){
-            authService.cadastrar({username, email, password});
+            authService.cadastrar({userName, email, password});
             Alert.alert('usuario cadastrado com sucesso');
         }
 

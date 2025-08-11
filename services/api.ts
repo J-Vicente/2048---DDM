@@ -3,9 +3,9 @@ import axios from 'axios';
 
 const getBaseUrl = () => {
   if (Platform.OS === 'android') {
-    return 'http://localhost:3000/api'; 
+    return 'http://192.168.2.153:3000/api'; 
   }
-  return 'http://localhost:3000/api'; 
+  return 'http://192.168.2.153:3000/api'; 
 };
 
 const BASE_URL =getBaseUrl();
@@ -14,7 +14,7 @@ interface NewRecordData {
   score:number;
   date:string;
   higherBlock:number;
-  userName:string;
+  userName:string | null;
 }
 
 
