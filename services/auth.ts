@@ -4,9 +4,9 @@ import { Platform } from 'react-native';
 
 const getBaseUrl = () => {
   if (Platform.OS === 'android') {
-    return 'http://192.168.2.153:3000/api'; 
+    return 'https://two048-api.onrender.com'; 
   }
-  return 'http://192.168.2.153:3000/api'; 
+  return 'https://two048-api.onrender.com'; 
 };
 
 const BASE_URL =getBaseUrl();
