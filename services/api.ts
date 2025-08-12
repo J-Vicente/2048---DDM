@@ -17,6 +17,14 @@ interface NewRecordData {
   userName:string | null;
 }
 
+interface GetData {
+  id: number,
+  score:number;
+  date:string;
+  higherBlock:number;
+  userName:string | null;
+}
+
 
 class RecordService {
   async cadastrar(recordData: NewRecordData) {
@@ -46,7 +54,7 @@ async getByID(id: number): Promise<NewRecordData[]> {
     return response.data;
   }
 
-  async getAll(): Promise<NewRecordData[]> {
+  async getAll(): Promise<GetData[]> {
       const response = await axios.get(`${BASE_URL}/records/`);
       return response.data;
     }

@@ -40,16 +40,12 @@ export default function Button(props:ButtonProps){
     const icon = iconMap[props.color as keyof typeof iconMap];
 
     function goTo(){
-        console.log('antes do if Novo jogo');
         if( props.title == 'Novo Jogo'){
-            console.log('antes do newGame');
             newGame();
         }
         if(props.title == 'Continuar'){
-            console.log('antes do newGame');
             continueGame();
         }
-        console.log('antes do push');
         router.push(props.route)
     }
 

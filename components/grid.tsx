@@ -12,22 +12,17 @@ export default function Button(){
 
   
   const handleSwipe = (direction: string) => {
-    console.log(direction);
     switch (direction) {
       case 'SWIPE_LEFT':
-        console.log(direction);
         moveBlocks(2); 
         break;
       case 'SWIPE_RIGHT':
-        console.log(direction);
         moveBlocks(1); 
         break;
       case 'SWIPE_UP':
-        console.log(direction);
         moveBlocks(3); 
         break;
       case 'SWIPE_DOWN':
-        console.log(direction);
         moveBlocks(4); 
         break;
     }

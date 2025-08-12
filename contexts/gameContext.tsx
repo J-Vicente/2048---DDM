@@ -28,14 +28,12 @@ export function GameProvider({children}:{children: ReactNode }){
     const router = useRouter();
 
     function newGame() {
-      console.log('newgame');
       setGrid(prevGrid => {
         const newGrid = Array.from({ length: 4 }, () =>Array(4).fill(0));
         return newGrid;
       });              
       newBlock();
       newBlock();
-      console.log('novos blocos');
     }
 
     function continueGame() {
@@ -63,13 +61,11 @@ export function GameProvider({children}:{children: ReactNode }){
       
       const userName = await AsyncStorage.getItem('userName');
 
-      console.log({score, date, higherBlock, userName});
       recordService.cadastrar({score, date, higherBlock, userName});
 
       try {
         await AsyncStorage.removeItem('score');
-        await AsyncStorage.removeItem('grid');
-        console.log("Jogo resetado!");        
+        await AsyncStorage.removeItem('grid');      
       } catch (error) {
         console.error("Erro ao resetar o jogo", error);
       }
@@ -80,7 +76,6 @@ export function GameProvider({children}:{children: ReactNode }){
       try {
         await AsyncStorage.setItem('score', score.toString()); 
         await AsyncStorage.setItem('grid', JSON.stringify(grid)); 
-        console.log("Jogo salvo!");
       } catch (error) {
         console.error("Erro ao salvar o jogo", error);
       }
