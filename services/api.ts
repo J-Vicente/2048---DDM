@@ -3,9 +3,9 @@ import axios from 'axios';
 
 const getBaseUrl = () => {
   if (Platform.OS === 'android') {
-    return 'https://two048-api.onrender.com'; 
+    return 'https://two048-api.onrender.com/api'; 
   }
-  return 'https://two048-api.onrender.com'; 
+  return 'https://two048-api.onrender.com/api'; 
 };
 
 const BASE_URL =getBaseUrl();
