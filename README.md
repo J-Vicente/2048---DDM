@@ -1,50 +1,55 @@
-# Welcome to your Expo app 👋
+# 2048 - Jogo Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este é um projeto do jogo 2048 desenvolvido em [React Native](https://reactnative.dev/) usando [Expo](https://expo.dev/). O objetivo é combinar blocos para alcançar a maior pontuação possível. Este é o rojeto final da matéria Desenvolvimento de Dispositivos Móveis do curso de Análise e Desenvolvimento de Sistemas, ministrada pelo professor Jeferson Queiroga.
 
-## Get started
+## Funcionalidades
 
-1. Install dependencies
+- Jogue 2048 com interface intuitiva e responsiva
+- Cadastro e login de usuários
+- Salve e continue partidas
+- Ranking com melhores pontuações
+- Persistência de dados usando AsyncStorage
+- Integração com API para registro e consulta de pontuações
 
+## Estrutura do Projeto
+
+- **app/**: Telas e rotas do aplicativo
+- **components/**: Componentes reutilizáveis (botão, grid, input, modal, etc)
+- **contexts/**: Contextos para gerenciamento de estado do jogo e usuário
+- **hooks/**: Hooks customizados (ex: carregamento de fontes)
+- **services/**: Serviços para comunicação com API (autenticação, ranking)
+- **constants/**: Cores e constantes do projeto
+- **assets/**: Imagens e fontes
+
+## Instalação
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/2048.git
+   cd 2048
+   ```
+
+2. Instale as dependências:
    ```bash
    npm install
    ```
 
-2. Start the app
-
+3. Inicie o projeto:
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Tecnologias Utilizadas
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- React Native
+- Expo
+- TypeScript
+- AsyncStorage
+- Axios
+- Expo Router
 
-## Get a fresh project
+## Como Jogar
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Deslize para combinar blocos e atingir pontuações maiores.
+- Cadastre-se para salvar seus resultados e competir no ranking.
